@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript QrCode Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.js" integrity="sha512-is1ls2rgwpFZyixqKFEExPHVUUL+pPkBEPw47s/6NDQ4n1m6T/ySeDW3p54jp45z2EJ0RSOgilqee1WhtelXfA==" crossorigin="anonymous"></script>
+    <style>
+        body{
+            border: 1px solid #444;
+            border-radius: 4px;
+            height: 95vh;
+        }
+        h3{
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 30px;
+            text-align: center;
+        }
+        .qr_sec{
+            display: flex;
+            justify-content: center;
+        }
+        .name{
+            font-size: 20px;
+            margin-right: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+        .btn{
+            color:#000;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+            font-size: medium;
+            font-size: 25px;
+            margin-right: 20px;
+        
+        
+        }
+        .btn:hover{
+            background-color: #444;
+            color: #fff;
+        }
+        .qr{
+            margin:20px;
+            display: flex;
+            justify-content: center;
+        }
+        .opt,.bt{
+            display: flex;
+            justify-content: center;
+            margin:20px;
+        }
+        .header{
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            align-items: center;
+        }
+        
+    </style>
+
+</head>
+<body>
+    
+    <div class="header">
+        <img src="myqr.jpg" alt="linkqr" width="50px" height="50px">
+        <h3> JS Custom QrCode Generator</h3>
+    </div>
+    
+    <div class="qr_sec">
+        <input type="text" class="name" name="text" id="qrtext" placeholder="Enter text" required>
+    </div>
+    <div class="opt">
+        <input type="text" class="name" name="text" id="fortext" placeholder="Foreground color" required>
+    <input type="text" class="name" name="text" id="backtext" placeholder="Background color" required>
+    </div>
+    <div class="bt">
+        <button class="btn" id="btn">Get QR</button>
+        <button class="btn" id="btn1">Clear QR</button>
+    </div>
+
+    <div class="qr" id="qrcode" download></div>
+    
+
+
+    <script>
+        var btn= document.getElementById("btn");
+        // console.log(btn)
+        btn.addEventListener("click",()=>{
+            var text = document.getElementById("qrtext").value;
+            var forcolor = document.getElementById("fortext").value;
+            var backcolor=document.getElementById("backtext").value;
+            document.getElementById("qrtext").value="";
+            document.getElementById("fortext").value="";
+            document.getElementById("backtext").value="";
+            var qr = new QRCode(document.getElementById("qrcode"),{
+           text:`${text}`,
+           width:150,
+           height:150,
+           colorDark:`${forcolor}`,
+           colorLight:`${backcolor}`,
+           correctLevel : QRCode.CorrectLevel.H
+        });
+        
+        })
+        document.getElementById("btn1").addEventListener('click',()=>{
+            document.getElementById("qrcode").style="display:none"
+        }
+        );
+    
+
+    </script>
+</body>
+
+</html>
